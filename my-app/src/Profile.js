@@ -12,6 +12,10 @@ const Profile = ({name, avatar_url, handleLogout, forkedRepos, pullRequests}) =>
       events={forkedRepos}
     />
     <br/>
+    <EventList
+      title="Pull Requests"
+      events={pullRequests}
+    />
   </div>
 );
 
