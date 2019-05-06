@@ -8,7 +8,9 @@ export default class App extends Component {
     this.state = {
       loggedIn: false,
       username: "",
-      profile: {}
+      profile: {},
+      forkedRepos: [],
+      pullRequests: []
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -20,6 +22,10 @@ export default class App extends Component {
     return fetch(`https://api.github.com/users/${username}`);
   }
 
+  getGithubEvents(username) {
+    return fetch(`https://api.github.com/users/${username}/events`)
+  }
+
   handleChange(e) {
     this.setState({
       username: e.target.value
@@ -29,12 +35,26 @@ export default class App extends Component {
   handleLogin() {
     this.getGithubUser(this.state.username)
       .then(res => res.json())
-      .then(data => this.setState({...this.state, loggedIn: true, profile: data}))
+      .then(profile => this.setState({...this.state, loggedIn: true, profile}))
       .catch(err => this.setState({error: err}));
+    this.getGithubEvents(this.state.username)
+      .then(res => res.json())
+      .then(events => {
+        this.setState({
+          forkedRepos: events.filter(event => event.type === "ForkEvent"),
+          pullRequests: events.filter(event => event.type === "PullRequestEvent")
+        })
+      })
   }
 
   handleLogOut() {
-    this.setState({loggedIn: false, username: "", profile: {}});
+    this.setState({
+      loggedIn: false,
+      username: "",
+      profile: {},
+      forkedRepos: [],
+      pullRequests: []
+    });
   }
 
   render() {
@@ -44,6 +64,8 @@ export default class App extends Component {
           <Profile
             {...this.state.profile}
             handleLogout={this.handleLogOut}
+            forkedRepos={this.state.forkedRepos}
+            pullRequests={this.state.pullRequests}
           />
         ) : (
           <Login
