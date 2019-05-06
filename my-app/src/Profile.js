@@ -1,5 +1,5 @@
 import React from "react";
-import ForkedRepoList from "./ForkedRepoList"
+import EventList from "./EventList"
 
 const Profile = ({name, avatar_url, handleLogout, forkedRepos, pullRequests}) => (
   <div className="profile">
@@ -7,7 +7,7 @@ const Profile = ({name, avatar_url, handleLogout, forkedRepos, pullRequests}) =>
     <img src={avatar_url} alt={`${name}'s avatar`}/>
     <button onClick={handleLogout}>Logout</button>
     <br/>
-    <ForkedRepoList
+    <EventList
       title="Forked Repos"
       events={forkedRepos}
     />
