@@ -23,3 +23,8 @@ button {
     background: lightgrey;
 
 }
+
+.profile img {
+    width: 200px;
+    border-radius: 50%;
+}

@@ -1,8 +1,10 @@
 import React from "react";
 
-const Profile = ({username}) => (
-  <div>
-    <h3>Hello {username}</h3>
+const Profile = ({name, avatar_url, handleLogout}) => (
+  <div className="profile">
+    <h3>Hello {name}!</h3>
+    <img src={avatar_url} alt={`${name}'s avatar`}/>
+    <button onClick={handleLogout}>Logout</button>
   </div>
 );
 

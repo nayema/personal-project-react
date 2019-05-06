@@ -34,7 +34,7 @@ export default class App extends Component {
   }
 
   handleLogOut() {
-    this.setState({...this.state, loggedIn: false});
+    this.setState({loggedIn: false, username: "", profile: {}});
   }
 
   render() {
@@ -42,7 +42,8 @@ export default class App extends Component {
       <div className="App">
         {this.state.loggedIn ? (
           <Profile
-            username={this.state.username}
+            {...this.state.profile}
+            handleLogout={this.handleLogOut}
           />
         ) : (
           <Login
