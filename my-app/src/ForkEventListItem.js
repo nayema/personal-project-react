@@ -1,8 +1,8 @@
 import React from "react";
 
 const ForkEventListItem = ({ event }) => (
-  <a key={event.repo.id} href={`https://github.com/${event.repo.name}`}>
-    <li key={event.id}
+  <a href={`https://github.com/${event.repo.name}`}>
+    <li
     >
       {event.repo.name}
     </li>
