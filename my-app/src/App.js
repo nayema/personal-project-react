@@ -9,8 +9,7 @@ export default class App extends Component {
       loggedIn: false,
       username: "",
       profile: {},
-      forkedRepos: [],
-      pullRequests: []
+      forkedRepos: []
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -19,12 +18,30 @@ export default class App extends Component {
   }
 
   getGithubUser(username) {
-    return fetch(`https://api.github.com/users/${username}`);
+    return fetch(`https://api.github.com/users/${username}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("User fetch failed");
+        }
+        console.log(response.json());
+        return response.json();
+      });
   }
 
-  getGithubEvents(username) {
+  getGitHubForkedRepos(username) {
     return fetch(`https://api.github.com/users/${username}/events`)
+      .then(response => {
+        if (!response.ok) {
+          return Promise.reject('something went wrong!')
+        }
+
+        return response.json()
+
+      })
+      .then(data => console.log(data.filter(event => event.type === 'ForkEvent')))
+      .catch(error => console.log('error is', error));
   }
+
 
   handleChange(e) {
     this.setState({
@@ -33,18 +50,25 @@ export default class App extends Component {
   }
 
   handleLogin() {
-    this.getGithubUser(this.state.username)
-      .then(res => res.json())
-      .then(profile => this.setState({...this.state, loggedIn: true, profile}))
-      .catch(err => this.setState({error: err}));
-    this.getGithubEvents(this.state.username)
-      .then(res => res.json())
-      .then(events => {
+    return Promise.all([
+      this.getGithubUser(this.state.username),
+      this.getGitHubForkedRepos(this.state.username)
+    ])
+      .then(responses => {
+        const [profile, forkedRepos] = responses;
+
         this.setState({
-          forkedRepos: events.filter(event => event.type === "ForkEvent"),
-          pullRequests: events.filter(event => event.type === "PullRequestEvent")
-        })
+          loggedIn: true,
+          profile,
+          forkedRepos,
+          error: false
+        });
       })
+      .catch(err => {
+        this.setState({
+          error: true
+        });
+      });
   }
 
   handleLogOut() {
@@ -65,7 +89,6 @@ export default class App extends Component {
             {...this.state.profile}
             handleLogout={this.handleLogOut}
             forkedRepos={this.state.forkedRepos}
-            pullRequests={this.state.pullRequests}
           />
         ) : (
           <Login
