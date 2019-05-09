@@ -39,7 +39,7 @@ export default class App extends Component {
 
       })
       .then(data => console.log(data.filter(event => event.type === 'ForkEvent')))
-      .catch(error => console.log('error is', error));
+      .catch(error => console.log('error is', error.message));
   }
 
 
@@ -76,8 +76,7 @@ export default class App extends Component {
       loggedIn: false,
       username: "",
       profile: {},
-      forkedRepos: [],
-      pullRequests: []
+      forkedRepos: []
     });
   }
 
