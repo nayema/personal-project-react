@@ -23,7 +23,6 @@ export default class App extends Component {
         if (!response.ok) {
           throw new Error("User fetch failed");
         }
-        console.log(response.json());
         return response.json();
       });
   }
@@ -38,7 +37,7 @@ export default class App extends Component {
         return response.json()
 
       })
-      .then(data => console.log(data.filter(event => event.type === 'ForkEvent')))
+      .then(data => data.filter(event => event.type === 'ForkEvent'))
       .catch(error => console.log('error is', error.message));
   }
 
