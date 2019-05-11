@@ -108,6 +108,7 @@ export default class App extends Component {
             handleChange={this.handleChange}
             handleLogin={this.handleLogin}
             username={this.state.username}
+            error={this.state.error}
           />
         )}
       </div>
