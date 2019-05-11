@@ -1,4 +1,5 @@
 import React from "react";
+import KeyPress from "react-keypress";
 
 const Login = ({username, handleChange, handleLogin}) => (
   <div>
@@ -7,6 +8,7 @@ const Login = ({username, handleChange, handleLogin}) => (
       type="text"
       value={username}
       onChange={handleChange}
+      onKeyPress={KeyPress('enter', handleLogin)}
     />
     <button onClick={handleLogin}>Login</button>
   </div>
