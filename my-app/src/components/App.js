@@ -2,10 +2,9 @@ import React from 'react';
 import Login from '../containers/LoginContainer'
 // import Profile from '../containers/ProfileContainer';
 
-const App = () => (
+const App = ({ loggedIn }) => (
   <div className='App'>
-    <Login/>
-    {/*{loggedIn ? <Profile/> : <Login/>}*/}
+    { !loggedIn ? <Login/> : null}
   </div>
 );
 

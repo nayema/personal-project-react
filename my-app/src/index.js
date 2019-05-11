@@ -7,9 +7,6 @@ import thunk from "redux-thunk";
 import rootReducer from "./reducers";
 import App from './containers/AppContainer';
 
-// const enhancers = [applyMiddleware(thunk), window.devToolsExtension ? window.devToolsExtension() : f => f];
-// const store = createStore(rootReducer, applyMiddleware(thunk);
-
 const initialState = {};
 const enhancers = [];
 const middlewares = [
