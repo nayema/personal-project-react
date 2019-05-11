@@ -1,6 +1,6 @@
 import React from "react";
 
-const Profile = ({name, avatar_url, handleLogout}) => (
+const Logout = ({name, avatar_url, handleLogout}) => (
   <div className="profile">
     <div className="profile">
       <h3>Hello {name}!</h3>
@@ -10,4 +10,4 @@ const Profile = ({name, avatar_url, handleLogout}) => (
   </div>
 );
 
-export default Profile
+export default Logout
