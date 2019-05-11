@@ -1,11 +1,11 @@
 import { connect } from "react-redux";
-import {setUsername, login} from '../actions/login.actions'
+import { setUsername, login } from '../actions/authentication.actions'
 
 import Login from '../components/Login'
 
 const mapStateToProps = state => ({
-  username: state.username,
-  error: state.error
+  username: state.authentication.username,
+  error: state.authentication.error
 });
 
 const mapDispatchToProps = {

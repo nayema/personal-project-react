@@ -5,7 +5,7 @@ const initialState = {
   error: false
 };
 
-const loginReducer = (state, action) => {
+const authenticationReducer = (state, action) => {
   switch (action.type) {
     case "SET_USERNAME":
       return {
@@ -27,9 +27,11 @@ const loginReducer = (state, action) => {
         ...initialState,
         error: true
       };
+    case "LOGOUT_SUCCEEDED":
+      return initialState;
     default:
       return initialState
   }
 };
 
-export default loginReducer
+export default authenticationReducer

@@ -1,10 +1,10 @@
 import React from 'react';
-import Login from '../containers/LoginContainer'
-// import Profile from '../containers/ProfileContainer';
+import Login from "../containers/LoginContainer"
+import Logout from "../containers/LogoutContainer";
 
 const App = ({ loggedIn }) => (
-  <div className='App'>
-    { !loggedIn ? <Login/> : null}
+  <div>
+    {!loggedIn ? <Login/> : <Logout/>}
   </div>
 );
 
@@ -22,7 +22,7 @@ export default App;
 //     };
 //
 //     this.setUsername = this.setUsername.bind(this);
-//     this.login = this.login.bind(this);
+//     this.authentication = this.authentication.bind(this);
 //     this.handleLogOut = this.handleLogOut.bind(this);
 //   }
 //
@@ -57,7 +57,7 @@ export default App;
 //     });
 //   }
 //
-//   login() {
+//   authentication() {
 //     return Promise.all([
 //       this.getGithubUser(this.state.username),
 //       this.getGitHubForkedRepos(this.state.username),
@@ -104,7 +104,7 @@ export default App;
 //         ) : (
 //           <Login
 //             setUsername={this.setUsername}
-//             login={this.login}
+//             authentication={this.authentication}
 //             username={this.state.username}
 //             error={this.state.error}
 //           />

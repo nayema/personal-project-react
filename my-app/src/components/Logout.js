@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Logout = ({name, avatar, handleLogout}) => (
-  <div className='logout'>
+const Logout = ({name, avatar, logout}) => (
+  <div>
     <h3>Hello {name}!</h3>
     <img src={avatar} alt={`${name}'s avatar`}/>
-    <button onClick={handleLogout}>Logout</button>
+    <button onClick={logout}>Logout</button>
   </div>
 );
 
