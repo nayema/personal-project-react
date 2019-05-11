@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Login from "./Login"
-import Profile from "./Profile";
+import Logout from "./Logout";
 import ForkedRepoList from "./ForkedRepoList";
 import PullRequestList from "./PullRequestList";
 
@@ -90,7 +90,7 @@ export default class App extends Component {
       <div className="App">
         {this.state.loggedIn ? (
           <div>
-            <Profile
+            <Logout
               {...this.state.profile}
               handleLogout={this.handleLogOut}
             />
