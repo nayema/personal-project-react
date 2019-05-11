@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import Login from './Login'
-import Logout from './Logout';
-import ForkedRepoList from './ForkedRepoList';
-import PullRequestList from './PullRequestList';
 import Profile from "./Profile";
 
 export default class App extends Component {
