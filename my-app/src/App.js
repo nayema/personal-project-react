@@ -1,15 +1,16 @@
-import React, { Component } from "react";
-import Login from "./Login"
-import Logout from "./Logout";
-import ForkedRepoList from "./ForkedRepoList";
-import PullRequestList from "./PullRequestList";
+import React, { Component } from 'react';
+import Login from './Login'
+import Logout from './Logout';
+import ForkedRepoList from './ForkedRepoList';
+import PullRequestList from './PullRequestList';
+import Profile from "./Profile";
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loggedIn: false,
-      username: "",
+      username: '',
       profile: {},
       forkedRepos: [],
       pullRequests: []
@@ -24,7 +25,7 @@ export default class App extends Component {
     return fetch(`https://api.github.com/users/${username}`)
       .then(response => {
         if (!response.ok) {
-          throw new Error("User fetch failed");
+          throw new Error('User fetch failed');
         }
         return response.json();
       });
@@ -78,7 +79,7 @@ export default class App extends Component {
   handleLogOut() {
     this.setState({
       loggedIn: false,
-      username: "",
+      username: '',
       profile: {},
       forkedRepos: [],
       pullRequests: []
@@ -87,22 +88,14 @@ export default class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className='App'>
         {this.state.loggedIn ? (
-          <div>
-            <Logout
-              {...this.state.profile}
-              handleLogout={this.handleLogOut}
-            />
-            <ForkedRepoList
-              title="Forked Repos"
-              forkedRepos={this.state.forkedRepos}
-            />
-            <PullRequestList
-              title="Pull Requests"
-              pullRequests={this.state.pullRequests}
-            />
-          </div>
+          <Profile
+            profile={this.state.profile}
+            handleLogOut={this.handleLogOut}
+            forkedRepos={this.state.forkedRepos}
+            pullRequests={this.state.pullRequests}
+          />
         ) : (
           <Login
             handleChange={this.handleChange}

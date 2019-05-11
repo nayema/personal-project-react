@@ -1,12 +1,10 @@
-import React from "react";
+import React from 'react';
 
-const Logout = ({name, avatar_url, handleLogout}) => (
-  <div className="profile">
-    <div className="profile">
-      <h3>Hello {name}!</h3>
-      <img src={avatar_url} alt={`${name}'s avatar`}/>
-      <button onClick={handleLogout}>Logout</button>
-    </div>
+const Logout = ({name, avatar, handleLogout}) => (
+  <div className='logout'>
+    <h3>Hello {name}!</h3>
+    <img src={avatar} alt={`${name}'s avatar`}/>
+    <button onClick={handleLogout}>Logout</button>
   </div>
 );
 
