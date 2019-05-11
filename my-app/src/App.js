@@ -9,7 +9,8 @@ export default class App extends Component {
       loggedIn: false,
       username: "",
       profile: {},
-      forkedRepos: []
+      forkedRepos: [],
+      pullRequests: []
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -29,15 +30,15 @@ export default class App extends Component {
 
   getGitHubForkedRepos(username) {
     return fetch(`https://api.github.com/users/${username}/events`)
-      .then(response => {
-        if (!response.ok) {
-          return Promise.reject('something went wrong!')
-        }
+      .then(response => !response.ok ? Promise.reject('something went wrong!') : response.json())
+      .then(forkedRepos => forkedRepos.filter(forkedRepo => forkedRepo.type === 'ForkEvent'))
+      .catch(error => console.log('error is', error.message));
+  }
 
-        return response.json()
-
-      })
-      .then(data => data.filter(event => event.type === 'ForkEvent'))
+  getGitHubPullRequests(username) {
+    return fetch(`https://api.github.com/search/issues?q=author:${username}+type:pr+created:>2018`)
+      .then(response => !response.ok ? Promise.reject('something went wrong!') : response.json())
+      .then(pullRequests => pullRequests.items)
       .catch(error => console.log('error is', error.message));
   }
 
@@ -51,15 +52,17 @@ export default class App extends Component {
   handleLogin() {
     return Promise.all([
       this.getGithubUser(this.state.username),
-      this.getGitHubForkedRepos(this.state.username)
+      this.getGitHubForkedRepos(this.state.username),
+      this.getGitHubPullRequests(this.state.username)
     ])
       .then(responses => {
-        const [profile, forkedRepos] = responses;
+        const [profile, forkedRepos, pullRequests] = responses;
 
         this.setState({
           loggedIn: true,
           profile,
           forkedRepos,
+          pullRequests,
           error: false
         });
       })
@@ -75,7 +78,8 @@ export default class App extends Component {
       loggedIn: false,
       username: "",
       profile: {},
-      forkedRepos: []
+      forkedRepos: [],
+      pullRequests: []
     });
   }
 
@@ -87,6 +91,7 @@ export default class App extends Component {
             {...this.state.profile}
             handleLogout={this.handleLogOut}
             forkedRepos={this.state.forkedRepos}
+            pullRequests={this.state.pullRequests}
           />
         ) : (
           <Login

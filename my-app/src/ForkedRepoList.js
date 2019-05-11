@@ -1,14 +1,14 @@
 import React from "react";
 
-const ForkedRepoList = ({ title, events }) => (
+const ForkedRepoList = ({title, forkedRepos}) => (
   <div>
-    {title}
+    <h3>{title}</h3>
     <ul>
-      {events.map(event =>
-        <a href={`https://github.com/${event.repo.name}`}>
+      {forkedRepos.map(forkedRepo =>
+        <a key={forkedRepo.repo.id} href={`https://github.com/${forkedRepo.repo.name}`}>
           <li
           >
-            {event.repo.name}
+            {forkedRepo.repo.name}
           </li>
         </a>
       )

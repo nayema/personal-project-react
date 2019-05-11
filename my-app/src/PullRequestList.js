@@ -1,19 +1,16 @@
 import React from "react";
 
-const PullRequestList = ({ title, events }) => (
+const PullRequestList = ({title, pullRequests}) => (
   <div>
-    {title}
+    <h3>{title}</h3>
     <ul>
-      {events.map(event =>
-        <div>
-          <a href={`${event.html_url}`}>
-            <li
-            >
-              {event.title}
-            </li>
-          </a>
-          Status: {event.state}
-        </div>
+      {pullRequests.map(pullRequest =>
+        <a key={pullRequest.id} href={`${pullRequest.html_url}`}>
+          <li
+          >
+            {pullRequest.title} ({pullRequest.state})
+          </li>
+        </a>
       )
       }
     </ul>
