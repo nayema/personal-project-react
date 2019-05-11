@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Login from "./Login"
 import Profile from "./Profile";
+import ForkedRepoList from "./ForkedRepoList";
+import PullRequestList from "./PullRequestList";
 
 export default class App extends Component {
   constructor(props) {
@@ -87,12 +89,20 @@ export default class App extends Component {
     return (
       <div className="App">
         {this.state.loggedIn ? (
-          <Profile
-            {...this.state.profile}
-            handleLogout={this.handleLogOut}
-            forkedRepos={this.state.forkedRepos}
-            pullRequests={this.state.pullRequests}
-          />
+          <div>
+            <Profile
+              {...this.state.profile}
+              handleLogout={this.handleLogOut}
+            />
+            <ForkedRepoList
+              title="Forked Repos"
+              forkedRepos={this.state.forkedRepos}
+            />
+            <PullRequestList
+              title="Pull Requests"
+              pullRequests={this.state.pullRequests}
+            />
+          </div>
         ) : (
           <Login
             handleChange={this.handleChange}
