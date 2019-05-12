@@ -1,7 +1,7 @@
 import React from 'react';
 import KeyPress from 'react-keypress';
 
-const Login = ({username, error, setUsername, login}) => (
+const Login = ({ username, error, setUsername, login }) => (
   <div>
     <h3>Enter your GitHub username</h3>
     {error ? <div>Incorrect username. Please try again</div> : ''}
