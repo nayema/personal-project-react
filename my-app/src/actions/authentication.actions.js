@@ -48,7 +48,7 @@ const getGithubUser = username => {
 };
 
 const getGitHubForkedRepos = username => {
-  return fetch(`https://api.github.com/users/${username}/events`)
+  return fetch(`https://api.github.com/users/${username}/events?per_page=100`)
     .then(response => !response.ok ? Promise.reject('something went wrong!') : response.json())
     .then(forkedRepos => forkedRepos.filter(forkedRepo => forkedRepo.type === 'ForkEvent'))
     .catch(error => console.log('error is', error.message));
