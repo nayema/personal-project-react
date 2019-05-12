@@ -1,10 +1,10 @@
 import React from 'react';
 import Login from "../containers/LoginContainer"
-import Logout from "../containers/LogoutContainer";
+import Profile from "../containers/ProfileContainer";
 
 const App = ({ loggedIn }) => (
   <div>
-    {!loggedIn ? <Login/> : <Logout/>}
+    {!loggedIn ? <Login/> : <Profile/>}
   </div>
 );
 
