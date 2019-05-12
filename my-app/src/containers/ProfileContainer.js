@@ -6,7 +6,8 @@ import Profile from '../components/Profile'
 const mapStateToProps = state => ({
   name: state.authentication.profile.name,
   avatar: state.authentication.profile.avatar,
-  forkedRepos: state.authentication.profile.forkedRepos
+  forkedRepos: state.authentication.profile.forkedRepos,
+  pullRequests: state.authentication.profile.pullRequests
 });
 
 const mapDispatchToProps = {

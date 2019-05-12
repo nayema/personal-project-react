@@ -21,14 +21,16 @@ export const login = () => (dispatch, getState) => {
   const username = getState().authentication.username;
   Promise.all([
     getGithubUser(username),
-    getGitHubForkedRepos(username)
+    getGitHubForkedRepos(username),
+    getGitHubPullRequests(username)
   ])
     .then(responses => {
-      const [profile, forkedRepos] = responses;
+      const [profile, forkedRepos, pullRequests] = responses;
       dispatch(loginSucceeded({
         name: profile.name,
         avatar: profile.avatar_url,
-        forkedRepos
+        forkedRepos,
+        pullRequests
       }))
     })
     .catch(() => dispatch(loginErrored()));
@@ -52,9 +54,9 @@ const getGitHubForkedRepos = username => {
     .catch(error => console.log('error is', error.message));
 };
 
-// const getGitHubPullRequests = username => {
-//   return fetch(`https://api.github.com/search/issues?q=author:${username}+type:pr+created:>2018`)
-//     .then(response => !response.ok ? Promise.reject('something went wrong!') : response.json())
-//     .then(pullRequests => pullRequests.items)
-//     .catch(error => console.log('error is', error.message));
-// };
+const getGitHubPullRequests = username => {
+  return fetch(`https://api.github.com/search/issues?q=author:${username}+type:pr+created:>2018`)
+    .then(response => !response.ok ? Promise.reject('something went wrong!') : response.json())
+    .then(pullRequests => pullRequests.items)
+    .catch(error => console.log('error is', error.message));
+};
