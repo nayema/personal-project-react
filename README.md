@@ -38,7 +38,6 @@ React and Redux, of course! You should use create-react-app, a convenient way to
 You can refer to the finished version of a similar Github app here to get started: https://github.com/melaniebrgr/github-app-with-redux-after/tree/final-20180927-1304.
 
 ## Instructions
-
 1. Fork this repository to your own github
 2. Clone the forked version of this repository to your computer 
 3. Set up create react app and make an initial commit to the master branch of your repo
